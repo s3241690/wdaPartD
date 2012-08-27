@@ -79,6 +79,10 @@ if($_GET['errors'] != null)
 	/* Check if there are any error messages to display */
 	switch($errors)
 	{
+	case -1:
+		echo '<p class="error">You have attempted to search the database in an unauthorise way, please re-submit:</p>';
+		break;
+	
 	case 1:
 		echo '<p class="error">You have entered invalid year requirements, please check them and re-submit:</p>';
 		break;

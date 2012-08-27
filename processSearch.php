@@ -11,37 +11,65 @@
 require_once('connect.inc');
 
 
+/* Check if user has entered to page in an unauthrised way*/
+$errors = null;
+
+if(!isset($_GET['wine']))
+	$errors = -1;
+if(!isset($_GET['winery']))
+	$errors = -1;
+if(!isset($_GET['region']))
+	$errors = -1;
+if(!isset($_GET['grapeVariety']))
+	$errors = -1;
+if(!isset($_GET['yearLowerBound']))
+	$errors = -1;
+if(!isset($_GET['yearUpperBound']))
+	$errors = -1;
+if(!isset($_GET['minWinesInStock']))
+	$errors = -1;
+if(!isset($_GET['minWinesOrdered']))
+	$errors = -1;
+if(!isset($_GET['costLowerBound']))
+	$errors = -1;
+if(!isset($_GET['costUpperBound']))
+	$errors = -1;
 
 
+if ($errors != null)
+{
+	die('<p>You are trying to acces the page in an unauthrised way, please the main to search page,<a href="search.php">here</a>to launch your query.</p>');
+}
+			
 /* Collect GET Search Criteria */
-if($_GET['wine'] != null)
+if(!empty($_GET['wine']))
 	$wine = $_GET['wine'];
 
-if($_GET['winery'] != null)
+if(!empty($_GET['winery']))
 	$winery = $_GET['winery'];
 
-if($_GET['region'] != null)
+if(!empty($_GET['region']))
 	$region = $_GET['region'];
 
-if($_GET['grapeVariety'] != null)
+if(!empty($_GET['grapeVariety']))
 	$grapeVariety = $_GET['grapeVariety'];
 	
-if($_GET['yearLowerBound'] != null)
+if(!empty($_GET['yearLowerBound']))
 	$yearLowerBound = $_GET['yearLowerBound'];
 	
-if($_GET['yearUpperBound'] != null)
+if(!empty($_GET['yearUpperBound']))
 	$yearUpperBound = $_GET['yearUpperBound'];
 	
-if($_GET['minWinesInStock'] != null)
+if(!empty($_GET['minWinesInStock']))
 	$minWinesInStock = $_GET['minWinesInStock'];
 	
-if($_GET['minWinesOrdered'] != null)
+if(!empty($_GET['minWinesOrdered']))
 	$minWinesOrdered = $_GET['minWinesOrdered'];
 	
-if($_GET['costLowerBound'] != null)
+if(!empty($_GET['costLowerBound']))
 	$costLowerBound = $_GET['costLowerBound'];
 	
-if($_GET['costUpperBound'] != null)
+if(!empty($_GET['costUpperBound']))
 	$costUpperBound = $_GET['costUpperBound'];
 	
 
