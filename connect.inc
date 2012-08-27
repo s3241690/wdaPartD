@@ -2,18 +2,27 @@
 /**
 * Checks the connection to the local install of MySQL
 */
-require_once('db.inc');
+require_once('db_pdo.inc');
 
-if (!$dbconn = mysql_connect(DB_HOST, DB_USER, DB_PW)) {
-  echo 'Could not connect to the mysql on ' . DB_HOST . "\n";
-  exit;
+function createPDO(){
+	try{  
+		$pdo = new PDO($dsn, DB_USER, DB_PW);
+	  
+		// all errors will throw exceptions
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	 
+		return $pdo;
+	}
+	catch (PDOException $ePDO)
+		echo $ePDO->getMessage();
+		exit;
+	}
 }
 
-if (!mysql_select_db(DB_NAME, $dbconn)) {
- echo 'Could not use database ' . DB_NAME . "\n";
- echo mysql_error() . "\n";
- exit;
+function destroyPDO($pdo){
+	$pdo = null;
 }
+
 
 ?>
 

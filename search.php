@@ -1,25 +1,28 @@
 <?php 
 	require_once('connect.inc');
+	$pdo = createPDO();
 	
+
 	// Get Regions
 	$query = 'select * from region';
-    $regionList = mysql_query($query, $dbconn);
+    $regionList = $pdo->query($query);
 	
 	// Get Grape Varieties
 	$query = 'select * from grape_variety;';
-    $grapeVarietyList = mysql_query($query, $dbconn);
+    $grapeVarietyList = $pdo->query($query);
 	
 	// Get Lower Bound of the Wine Production Years
 	$query = 'select min(year) from wine';
-    $yearMinimum = mysql_query($query, $dbconn);
-	$yearMinimum = mysql_fetch_row($yearMinimum);
-	$yearMinimum = $yearMinimum[0];
+    $yearMinimum = $pdo->query($query);
+	$yearMinimum = $yearMinimum->fetch(PDO::FETCH_OBJ); 
+	
+	
 	
 	// Get Upper Bound of the Wine Production Years
 	$query = 'select max(year) from wine;';
-    $yearMaximum = mysql_query($query, $dbconn);
-	$yearMaximum = mysql_fetch_row($yearMaximum);
-	$yearMaximum = $yearMaximum[0];
+    $yearMaximum = $pdo->query($query);
+	$yearMaximum = $yearMaximum->fetch(PDO::FETCH_OBJ);
+	
 	
 	// Calculate Production Year Difference 
 	$yearDifference = $yearMaximum - $yearMinimum;
@@ -123,8 +126,8 @@ if($_GET['errors'] != null)
 					<label class="search">Region:</label>
 					<select name="region">
 						<?php 
-						 while($row = mysql_fetch_row($regionList)) {
-							$regionListItem = $row[1];
+						 while($row = $regionList->fetch(PDO::FETCH_OBJ))  {
+							$regionListItem = $row->region_name;
 							
 							if (strcmp($regionListItem, $region) == 0)
 								echo '<option value="'. $regionListItem . '" selected="selected">'.$regionListItem.'</option>';
@@ -141,8 +144,8 @@ if($_GET['errors'] != null)
 					<select name="grapeVariety">
 						<?php 
 						
-						 while($row = mysql_fetch_row($grapeVarietyList)) {
-							$grapeVarietyListItem = $row[1];
+						 while($row = $grapeVarietyList->fetch(PDO::FETCH_OBJ)) {
+							$grapeVarietyListItem = $row->variety;
 							
 							if (strcmp($grapeVarietyListItem, $grapeVariety) == 0)
 								echo '<option value="'. $grapeVarietyListItem. '" selected="selected">'. $grapeVarietyListItem. '</option>';

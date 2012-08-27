@@ -11,6 +11,7 @@
 require_once('connect.inc');
 
 
+
 /* Check if user has entered to page in an unauthrised way*/
 $errors = null;
 
@@ -110,6 +111,9 @@ if ($errors != null)
 
 	header('Location: '.$returnString);
 }
+	
+	/* Create New PDO OBJECT */
+	$pdo = createPDO();
 
 /*  Create Base Wine SQL Query */
 	$query = "SELECT wine.wine_id, wine_name, "
@@ -195,14 +199,20 @@ if (isset($minWinesOrdered)){
 
 /* Run the query on the server */
 
-$queryResult = mysql_query($query, $dbconn);
+$queryResult = $pdo->query($query);
+  $index = 0;
+  while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+	$wineDetails[$index] = $row;
+	$index++;
+    
+  }
 
 
-					 $index = 0;
-					 while($row = mysql_fetch_assoc($queryResult)) {
-						$wineDetails[$index] = $row;;
-						$index++;
-					}
+
+					 
+					
+					
+					
 					
 
 echo '<h1>WineStore Database: Search Results</h1>';
