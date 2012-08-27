@@ -1,0 +1,81 @@
+body, div, dl, dt, dd, ul, ol, li, h1, form, fieldset, input, select, textarea, p, a, a:hover, a:visited{
+	
+	font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
+	color: #000;
+}
+
+h1{
+ font-size:14px;
+}
+p{
+ font-size:12px;
+}
+
+label.search
+{
+	text-align:right;
+	display: inline-block;
+	width: 250px;
+}
+
+input.search
+{
+	text-align:right;
+	display: inline-block;
+	width: 100px;
+	margin-left: 150px;
+	text-align:center;
+	
+}
+table
+{
+border-collapse:collapse;
+}
+
+a, a:visited, a:hover
+{
+	font-size:12px;
+	text-decoration: none;
+	margin: 10px;
+	
+}
+
+th, td
+{
+font-size: 12px;
+border: 2px solid #000;
+padding:5px;
+}
+
+th 
+{
+	
+	background: #CCC;
+	margin: 0;
+	
+}
+
+p.error
+{
+ color: red;
+}
+
+legend
+{
+border: 2px solid #000;
+}
+fieldset
+{
+border: 2px solid #000;
+width: 500px;
+}
+
+form
+{
+ width: 400px;
+}
+
+.row
+{
+margin:5px;
+}
